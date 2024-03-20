@@ -12,29 +12,30 @@ class GoodsServicesTestCase(APITestCase):
             name="кардиган красный",
             main_photo="media/main_photo/кардиган-красный",
             description="Описание товара",
-            article = 1000001,
+            article=1000001,
             slug="kardigan-krasnyi",
         )
         Goods.objects.create(
             name="шапка",
             main_photo="media/main_photo/name2",
             description="Описание товара2",
-            composition = "Хлопок",
+            composition="Хлопок",
             slug="shapka",
         )
         Goods.objects.create(
             name="шарф красный",
             main_photo="media/main_photo/шарф-красный",
             description="Описание товара3",
-            additional_materials = "нет",
+            additional_materials="нет",
             slug="sharf-krasnyi",
         )
-
 
     def test_data_from_get_goods_data_for_product_cards(self):
         """Ensure we can get correct data from function get_goods_data_for_product_cards"""
 
-        expected_data = Goods.objects.only("id", "name", "main_photo", "description", "slug")
+        expected_data = Goods.objects.only(
+            "id", "name", "main_photo", "description", "slug"
+        )
         function_data = goods_services.get_goods_data_for_product_cards()
 
         self.assertQuerysetEqual(expected_data, function_data)
