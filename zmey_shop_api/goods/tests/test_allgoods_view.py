@@ -2,7 +2,7 @@ from rest_framework.test import APITestCase, APIRequestFactory
 from django.urls import reverse
 from rest_framework import status
 
-from goods.models import Goods, CategoryGoods
+from goods.models import Goods
 from goods.views import AllGoodsReadOnlyViewSet
 from goods.serializers import AllGoodsSerializer
 from goods.paginations import GoodsPaginations
@@ -45,7 +45,9 @@ class AllGoodsViewSetTestCase(APITestCase):
         """Ensure we can get correct queryset"""
 
         queryset = AllGoodsReadOnlyViewSet.queryset
-        expected_data = Goods.objects.only("id", "name", "main_photo", "description", "slug")
+        expected_data = Goods.objects.only(
+            "id", "name", "main_photo", "description", "slug"
+        )
 
         self.assertQuerysetEqual(expected_data, queryset)
 
@@ -56,7 +58,7 @@ class AllGoodsViewSetTestCase(APITestCase):
         serializer_class = AllGoodsReadOnlyViewSet.serializer_class
 
         self.assertEqual(expected_class, serializer_class)
-    
+
     def test_get_pagination_class(self):
         """Ensure we can get correct pagination class"""
 
@@ -72,4 +74,3 @@ class AllGoodsViewSetTestCase(APITestCase):
         paginaton_on_class = AllGoodsReadOnlyViewSet.pagination_class.page_size
 
         self.assertEqual(expected_pagination, paginaton_on_class)
-    
