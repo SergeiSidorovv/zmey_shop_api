@@ -75,6 +75,28 @@ TEMPLATES = [
     },
 ]
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters":{
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+            },
+    },
+    "handlers": {
+        "db_console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django.db.backends":{
+            'handlers': ['db_console'],
+            "level": 'DEBUG',
+        },
+    },
+}  
+
 WSGI_APPLICATION = 'zmey_shop_api.wsgi.application'
 
 

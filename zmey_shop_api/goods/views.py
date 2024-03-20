@@ -1,13 +1,12 @@
-from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework import permissions
-from rest_framework.decorators import action
-from rest_framework.response import Response
 
 from goods.services import goods_services
-from goods import serializers
+from goods import serializers, paginations
+
 
 class AllGoodsReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
+    """A ViewSet for viewing all goods with only read"""
 
     queryset = goods_services.get_goods_for_product_card()
-    serializer_class = serializers.AllGoodsSerializers
+    serializer_class = serializers.AllGoodsSerializer
+    pagination_class = paginations.GoodsPaginations
