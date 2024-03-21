@@ -3,8 +3,8 @@ from rest_framework import serializers
 from goods.models import Goods
 
 
-class AllGoodsSerializer(serializers.ModelSerializer):
-    """A serializer for changes goods data"""
+class GoodsSerializer(serializers.ModelSerializer):
+    """Serializer for replacing goods data"""
 
     class Meta:
         model = Goods

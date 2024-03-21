@@ -35,7 +35,7 @@ class Goods(models.Model):
         return reverse("product", kwargs={"product_slug": self.slug})
 
     class Meta:
-        """Metadata by model"""
+        """Metadata by goods model"""
 
         verbose_name = "Одежда"
         verbose_name_plural = "Одежды"
@@ -44,13 +44,19 @@ class Goods(models.Model):
 
 
 class CategoryGoods(models.Model):
+    """CategoryGoods models in the database"""
+
     name = models.CharField(max_length=60, verbose_name="Категория")
     slug = models.SlugField(max_length=60, unique=True, verbose_name="URL-категории")
 
     def __str__(self):
+        """Returns the category product name"""
+
         return self.name
 
     class Meta:
+        """Metadata by category goods model """
+
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
         ordering = ["id"]
