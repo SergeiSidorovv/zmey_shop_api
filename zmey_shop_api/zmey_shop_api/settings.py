@@ -88,13 +88,20 @@ LOGGING = {
         "db_console": {
             "class": "logging.StreamHandler",
         },
+        "console_info": {
+            "class": "logging.StreamHandler",
+        },
     },
     "loggers": {
         "django.db.backends":{
             'handlers': ['db_console'],
             "level": 'DEBUG',
         },
-    },
+        "django.info.backends":{
+            'handlers':['console_info'],
+            "level": 'INFO',
+        }
+    }, 
 }  
 
 WSGI_APPLICATION = 'zmey_shop_api.wsgi.application'

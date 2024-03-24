@@ -11,8 +11,7 @@ def get_goods_data_for_product_cards() -> BaseManager[Goods]:
 
 
 def get_goods_select_category(category_slug: str) -> BaseManager[Goods]:
-    """
-    A function for getting goods data from database by the selected category
+    """A function for getting goods data from database by the selected category
 
     Keyword arguments:
     category_slug - a parameter for finding the selected product category
@@ -26,3 +25,16 @@ def get_goods_select_category(category_slug: str) -> BaseManager[Goods]:
         )
         return choice_goods
     return choice_category
+
+
+def get_search_goods(name_product: str) -> BaseManager[Goods]:
+    """A function for getting goods data from database by the desired product name
+
+    Keyword arguments:
+    name_product -- a parameter for searching for the desired product by name
+    """
+
+    search_goods = Goods.objects.filter(name__icontains=name_product).only(
+        "id", "name", "main_photo", "description", "slug"
+    )
+    return search_goods
