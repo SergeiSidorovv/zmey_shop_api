@@ -39,3 +39,14 @@ class GoodsServicesTestCase(APITestCase):
         function_data = goods_services.get_goods_data_for_product_cards()
 
         self.assertQuerysetEqual(expected_data, function_data)
+
+    def test_data_from_get_search_goods(self):
+        """Ensure we can get correct data from function get_goods_data_for_product_cards"""
+
+        name_product = "кардиган"
+        expected_data = search_goods = Goods.objects.filter(
+            name__icontains=name_product
+        ).only("id", "name", "main_photo", "description", "slug")
+        function_data = goods_services.get_search_goods(name_product=name_product)
+
+        self.assertQuerysetEqual(expected_data, function_data)

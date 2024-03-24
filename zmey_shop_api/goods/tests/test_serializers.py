@@ -1,8 +1,7 @@
 from rest_framework.test import APITestCase
-from django.urls import reverse
 
 from goods.models import Goods
-from goods.serializers import AllGoodsSerializer
+from goods.serializers import GoodsSerializer
 
 
 class AllGoodsSerializerTestCase(APITestCase):
@@ -20,7 +19,7 @@ class AllGoodsSerializerTestCase(APITestCase):
             slug="kardigan-krasnyis",
         )
 
-        serializer_data = AllGoodsSerializer([product_one], many=True).data
+        serializer_data = GoodsSerializer([product_one], many=True).data
 
         expected_data = [
             {
