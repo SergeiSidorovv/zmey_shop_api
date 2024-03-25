@@ -19,11 +19,15 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 from zmey_shop_api import settings
-from goods import routers
+
+# from goods import routers
+# from goods_favourite import routers
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path(r'api/v1/', include(routers.router_goods.urls)),
+    path("admin/", admin.site.urls),
+    path(r"api/v1/", include("goods.urls")),
+    path(r"api/v2/", include("goods_favourite.urls")),
 ]
 
 if settings.DEBUG:
