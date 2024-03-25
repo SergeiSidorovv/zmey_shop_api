@@ -55,7 +55,7 @@ class CategoryGoods(models.Model):
         return self.name
 
     class Meta:
-        """Metadata by category goods model """
+        """Metadata by category goods model"""
 
         verbose_name = "Категория"
         verbose_name_plural = "Категории"

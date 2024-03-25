@@ -16,7 +16,7 @@ class Favourite(models.Model):
 
     class Meta:
         """Metadata by model"""
-        
+
         verbose_name = "Избранное"
         verbose_name_plural = "Избранные"
         ordering = ["id"]

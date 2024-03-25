@@ -3,7 +3,6 @@ from django.db.models.manager import BaseManager
 
 from goods.mixins.goods_mixin import BaseDataMixin
 from goods.services import goods_services
-from goods import serializers, paginations
 from goods.models import Goods
 
 
@@ -14,7 +13,7 @@ class AllGoodsReadOnlyModelViewSet(BaseDataMixin, viewsets.ReadOnlyModelViewSet)
 
 
 class ChoiceGoodsReadOnlyModelViewSet(BaseDataMixin, viewsets.ReadOnlyModelViewSet):
-    """Gives out  product cards for the selected category slug with the ability to view"""
+    """Gives out product cards for the selected category slug with the ability to view"""
 
     def get_queryset(self) -> BaseManager[Goods]:
         """The function returns a list of products by the selected category"""
@@ -24,7 +23,7 @@ class ChoiceGoodsReadOnlyModelViewSet(BaseDataMixin, viewsets.ReadOnlyModelViewS
         return choice_product
 
 
-class SearchGoodsReadOnlyModelViewSet(BaseDataMixin ,viewsets.ReadOnlyModelViewSet):
+class SearchGoodsReadOnlyModelViewSet(BaseDataMixin, viewsets.ReadOnlyModelViewSet):
     """Gives out product cards for the desired product name with the ability to view"""
 
     def get_queryset(self) -> BaseManager[Goods]:
