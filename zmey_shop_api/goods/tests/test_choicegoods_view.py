@@ -45,8 +45,7 @@ class ChoiceGoodsReadOnlyModelViewSetTestCase(APITestCase):
     def test_get_request(self):
         """Ensure we can get correct status code"""
 
-        url = reverse("choicegoods-list", kwargs={"slug": "кардиган"})
-        response = self.client.get(url)
+        response = self.client.get("/api/v1/choicegoods/кардиган/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -77,9 +76,7 @@ class ChoiceGoodsReadOnlyModelViewSetTestCase(APITestCase):
     def test_get_queryset(self):
         """Ensure we can get correct queryset"""
 
-        request = self.factory.get(
-            reverse("choicegoods-list", kwargs={"slug": "Verhnya-odezda"})
-        )
+        request = self.factory.get("/api/v1/choicegoods/Verhnya-odezda")
 
         choice_godos_view = ChoiceGoodsReadOnlyModelViewSet()
         choice_godos_view.setup(request, slug="Verhnya-odezda")

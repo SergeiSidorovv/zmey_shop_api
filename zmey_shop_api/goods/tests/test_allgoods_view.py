@@ -36,8 +36,7 @@ class AllGoodsReadOnlyModelViewSetTestCase(APITestCase):
     def test_get_request(self):
         """Ensure we can get correct status code"""
 
-        url = reverse("allgoods-list")
-        response = self.client.get(url)
+        response = self.client.get("/api/v1/allgoods/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
