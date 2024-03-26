@@ -38,5 +38,3 @@ class GoodsFavouriteServicesTestCase(APITestCase):
         function_data = favourite_services.get_favourite_goods(self.user.id)
 
         self.assertQuerysetEqual(expected_data, function_data)
-
-
