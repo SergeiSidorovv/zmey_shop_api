@@ -31,6 +31,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 # Application definition
 
@@ -43,11 +46,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'goods.apps.GoodsConfig',
     'goods_favourite.apps.GoodsFavouriteConfig',
-    'rest_framework'
+    'rest_framework',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -94,10 +99,10 @@ LOGGING = {
         },
     },
     "loggers": {
-        "django.db.backends":{
-            'handlers': ['db_console'],
-            "level": 'DEBUG',
-        },
+        # "django.db.backends":{
+        #     'handlers': ['db_console'],
+        #     "level": 'DEBUG',
+        # },
         "django.info.backends":{
             'handlers':['console_info'],
             "level": 'INFO',

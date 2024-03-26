@@ -53,9 +53,9 @@ class AllGoodsReadOnlyModelViewSetTestCase(APITestCase):
         """Ensure we can get correct pagination class"""
 
         expected_class = GoodsPaginations
-        serializer_class = AllGoodsReadOnlyModelViewSet.pagination_class
+        pagination_class = AllGoodsReadOnlyModelViewSet.pagination_class
 
-        self.assertEqual(expected_class, serializer_class)
+        self.assertEqual(expected_class, pagination_class)
 
     def test_get_count_pages(self):
         """Ensure we can get correct pagination"""

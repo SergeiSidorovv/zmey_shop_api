@@ -28,6 +28,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path(r"api/v1/", include("goods.urls")),
     path(r"api/v2/", include("goods_favourite.urls")),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 if settings.DEBUG:
