@@ -2,7 +2,7 @@ from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
 
 from goods_favourite.models import Favourite
-from goods_favourite.serializers import GoodsFavourtieSerializer
+from goods_favourite.serializers import GoodsFavourtieWithGoodsSerializer
 from goods.models import Goods
 
 
@@ -21,7 +21,7 @@ class GoodsFavouriteSerializerTestCase(APITestCase):
         )
         favourite_goods = Favourite.objects.create(goods=product, user=self.user)
 
-        serializer_data = GoodsFavourtieSerializer([favourite_goods], many=True).data
+        serializer_data = GoodsFavourtieWithGoodsSerializer([favourite_goods], many=True).data
 
         expected_data = [
             {

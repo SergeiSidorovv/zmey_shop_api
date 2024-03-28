@@ -4,7 +4,7 @@ from goods_favourite.models import Favourite
 from goods.serializers import GoodsSerializer
 
 
-class GoodsFavourtieSerializer(serializers.ModelSerializer):
+class GoodsFavourtieWithGoodsSerializer(serializers.ModelSerializer):
     """Serializer for replacing favourite goods data"""
 
     goods = GoodsSerializer(read_only=True)
@@ -14,3 +14,10 @@ class GoodsFavourtieSerializer(serializers.ModelSerializer):
 
         model = Favourite
         fields = ["goods"]
+
+
+class FavouriteGoodsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Favourite
+        fields = ["id", "user", "goods"]

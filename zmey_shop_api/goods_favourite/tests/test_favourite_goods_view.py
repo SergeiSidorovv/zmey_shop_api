@@ -3,7 +3,7 @@ from rest_framework import status
 from django.contrib.auth.models import User
 
 
-from goods_favourite.serializers import GoodsFavourtieSerializer
+from goods_favourite.serializers import GoodsFavourtieWithGoodsSerializer
 from goods_favourite.views import FavouriteGoodsReadOnlyModelViewSet
 from goods_favourite.paginations import GoodsFavouritePaginations
 from goods_favourite.models import Favourite
@@ -33,7 +33,7 @@ class FavouriteGoodsReadOnlyModelViewSetTestCase(APITestCase):
     def test_get_serializer_class(self):
         """Ensure we can get correct serializer class"""
 
-        expected_class = GoodsFavourtieSerializer
+        expected_class = GoodsFavourtieWithGoodsSerializer
         serializer_class = FavouriteGoodsReadOnlyModelViewSet.serializer_class
 
         self.assertEqual(expected_class, serializer_class)

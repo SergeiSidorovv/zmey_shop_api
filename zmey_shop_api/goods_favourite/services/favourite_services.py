@@ -26,3 +26,29 @@ def get_favourite_goods(user_id: int) -> BaseManager[Favourite]:
     )
 
     return favourite_goods
+
+
+def get_favourite_product(user_id: int, id_product: int) -> BaseManager[Favourite]:
+    """Gives the selected favourite product.
+
+    Keyword arguments:
+    user_id -- the ID of the registered user
+    id_product -- the ID of the product
+    """
+
+    favourite_product = Favourite.objects.filter(
+        user_id=user_id, goods_id=id_product
+    ).only("goods")
+
+    return favourite_product
+
+
+def get_favourite_product_by_id(
+    user_id: int, favourite_product_id: int
+) -> BaseManager[Favourite]:
+
+    favourite_product = Favourite.objects.filter(
+        id=favourite_product_id, user_id=user_id
+    ).only("id", "user", "goods")
+
+    return favourite_product
