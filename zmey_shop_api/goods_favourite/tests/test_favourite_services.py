@@ -38,3 +38,34 @@ class GoodsFavouriteServicesTestCase(APITestCase):
         function_data = favourite_services.get_favourite_goods(self.user.id)
 
         self.assertQuerysetEqual(expected_data, function_data)
+
+    def test_data_from_get_favourite_product_by_id_goods(self):
+        """Ensure we can get correct data from function get_favourite_product_by_id_goods"""
+
+        goods_id = Goods.objects.last().id
+
+        user_id = self.user.id
+        expected_data = Favourite.objects.filter(
+            user_id=user_id, goods_id=goods_id
+        ).only("goods")
+
+        function_data = favourite_services.get_favourite_product_by_id_goods(
+            user_id, goods_id
+        )
+
+        self.assertQuerysetEqual(expected_data, function_data)
+
+    def test_data_from_get_favourite_product_by_id(self):
+        """Ensure we can get correct data from function get_favourite_product_by_id"""
+
+        user_id = self.user.id
+        favourite_product_id = Favourite.objects.last().id
+        expected_data = Favourite.objects.filter(
+            id=favourite_product_id, user_id=user_id
+        ).only("id", "user", "goods")
+
+        function_data = favourite_services.get_favourite_product_by_id(
+            user_id, favourite_product_id
+        )
+
+        self.assertQuerysetEqual(expected_data, function_data)
