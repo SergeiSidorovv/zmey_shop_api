@@ -17,44 +17,52 @@ class FavouriteGoodsReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self) -> BaseManager[Favourite]:
         """The function returns a list of products, which added to the favourite user's"""
 
-        favourite_goods = favourite_services.get_favourite_goods(self.request.user.id)
-
+        user_id = self.request.user.id
+        favourite_goods = favourite_services.get_favourite_goods(user_id)
         return favourite_goods
 
 
 class FavouriteGooddsDeleteApiView(generics.DestroyAPIView):
-    def get_queryset(self):
-        favourite_goods = favourite_services.get_favourite_goods(self.request.user.id)
-        return favourite_goods
+    """Delete product by the id product from the favourite"""
 
-    def delete(self, request, *args, **kwargs):
+    def get_queryset(self):
+        """
+        The function returns the product by id, which will be deleted to the favourite
+        database
+        """
 
         id_product = self.kwargs["pk"]
-        user_id = request.user.id
+        user_id = self.request.user.id
 
         favourite_product = favourite_services.get_favourite_product_by_id(
             user_id, id_product
         )
-        if not favourite_product:
-            return Response(
-                "Такого товара не существует!", status=status.HTTP_400_BAD_REQUEST
-            )
-        return self.destroy(request, *args, **kwargs)
+        return favourite_product
 
     def destroy(self, request, *args, **kwargs):
+        """Destroy a model instance"""
+
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response("Товар успешно удалён!", status=status.HTTP_204_NO_CONTENT)
 
 
 class FavouriteGooddsCreateApiView(generics.CreateAPIView):
+    """Add product by the id goods from the favourite"""
 
     serializer_class = serializers.FavouriteGoodsSerializer
 
     def post(self, request, *args, **kwargs):
+        """
+        The function will be added the product by id goods to the favourite database,
+        or returns Response(status)
+        """
 
-        favourite_product = favourite_services.get_favourite_product(
-            request.user.id, int(request.data["goods"])
+        user_id = request.user.id
+        goods_id = int(request.data["goods"])
+
+        favourite_product = favourite_services.get_favourite_product_by_id_goods(
+            user_id, goods_id
         )
         if favourite_product:
             return Response(
